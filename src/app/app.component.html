@@ -1,6 +1,6 @@
 <router-outlet></router-outlet>
 <div class="mat-elevation-z8">
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" >
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -21,8 +21,8 @@
     <td mat-cell *matCellDef="let element"> {{element.email}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="phone" mat-sort-header>
-    <th mat-header-cell *matHeaderCellDef> Phone </th>
+  <ng-container matColumnDef="phone" >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
     <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
   </ng-container>
 

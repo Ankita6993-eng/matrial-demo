@@ -1,4 +1,4 @@
-import { Component,ViewChild, OnInit} from '@angular/core';
+import { Component,ViewChild, OnInit,AfterViewInit} from '@angular/core';
 import { from } from 'rxjs';
 import {ServicesService} from './services.service'
 import {MatTableDataSource} from '@angular/material/table';
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   
   @ViewChild(MatTableDataSource) dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort,{static: true}) sort: MatSort;
 
   constructor(private service : ServicesService){}
   ngOnInit() {
@@ -27,12 +27,11 @@ export class AppComponent implements OnInit{
   getdata(){
     this.service.getUser().subscribe((data:any) => {
       this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
+      this.dataSource.paginator = this.paginator ;
       this.dataSource.sort = this.sort;
       console.log('this.dataSource', this.dataSource);  
     });
   }
-
   
  
   }
