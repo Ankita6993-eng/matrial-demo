@@ -1,10 +1,40 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild, OnInit} from '@angular/core';
+import { from } from 'rxjs';
+import {ServicesService} from './services.service'
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'demo-sort-filter-page';
-}
+export class AppComponent implements OnInit{
+
+  displayedColumns: string[] = ['id', 'name', 'username', 'email','phone'];
+  
+  @ViewChild(MatTableDataSource) dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private service : ServicesService){}
+  ngOnInit() {
+    this.getdata()
+  }
+
+  getdata(){
+    this.service.getUser().subscribe((data:any) => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      console.log('this.dataSource', this.dataSource);  
+    });
+  }
+
+  
+ 
+  }
+
+  
