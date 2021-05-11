@@ -49,6 +49,6 @@
 <mat-form-field>
   <input matInput type="number" placeholder="Enter page number" [(ngModel)]="pageNumber" (ngModelChange)="goToPage()">
 </mat-form-field>
-<mat-paginator [pageSizeOptions]="[2,3,4]" [showFirstLastButtons]="true" (page)="pageEvent = handlePage($event)" [pageIndex]="index"></mat-paginator>
+<mat-paginator [length]="array.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true" (page)="onPageChanged($event)" [pageIndex]="index"></mat-paginator>
 
 </div></div>

@@ -23,7 +23,7 @@ export class AppComponent implements OnInit,AfterViewInit{
 
   activePageDataChunk:any = []
   isLoading = true;
-  public array: any;
+  public array: any=[];
   public pageSize = 3;
   public currentPage = 0;
   public totalSize = 0;
@@ -34,17 +34,6 @@ export class AppComponent implements OnInit,AfterViewInit{
 
   ngOnInit() {
     this.getdata()
-  }
-  public handlePage(e: any) {
-    this.currentPage = e.pageIndex;
-    console.log('this.currentPage', this.currentPage);
-    this.index=e.pageIndex
-    this.pageSize = e.pageSize;
-    console.log('this.pageSize', this.pageSize);
-    console.log('this.index', this.index);
-    
-    this.iterator();
-    return e
   }
   ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
@@ -58,23 +47,25 @@ export class AppComponent implements OnInit,AfterViewInit{
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator ;
       this.array = data;
-      this.totalSize = this.array.length;
-      this.iterator();
       this.dataSource.sort = this.sort;
-      console.log('this.dataSource', this.dataSource);     
+      //console.log('this.dataSource', this.dataSource);     
     });
-    
+    this.activePageDataChunk = this.array.slice(0,this.pageSize);
   }
 
- iterator() {
-    const start = this.currentPage * this.pageSize;
-    console.log('this.currentPage', this.currentPage);
-    console.log('start', start);
-    const end = (this.currentPage + 1) * this.pageSize;
-    console.log('end', end);
-    const part = this.array.slice(start, end);
-    console.log('part', part);
-    this.dataSource = part;
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  }
+
+  onPageChanged(e:any) {
+    console.log('this.array', this.array);
+    let firstCut = e.pageIndex * e.pageSize;
+    let secondCut = firstCut + e.pageSize;
+    this.activePageDataChunk = this.array.slice(firstCut, secondCut);
+    console.log('e.pageIndex', e.pageIndex);
+    console.log('firstcut', firstCut);
+    console.log('==>', this.activePageDataChunk);
+    
   }
 
   goToPage() {
@@ -85,6 +76,7 @@ export class AppComponent implements OnInit,AfterViewInit{
       length: this.paginator.length
     });
   }
+
 
   
   applyFilter(event: Event){
