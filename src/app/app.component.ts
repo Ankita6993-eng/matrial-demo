@@ -39,8 +39,10 @@ export class AppComponent implements OnInit{
     this.dataSource.filter = filterValue;
   }
 
-   doFilter(value: string){
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+   doFilter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    console.log('filterValue', filterValue);
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
   }
   
  
