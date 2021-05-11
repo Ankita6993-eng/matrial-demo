@@ -32,6 +32,16 @@ export class AppComponent implements OnInit{
       console.log('this.dataSource', this.dataSource);  
     });
   }
+
+  applyFilter(filterValue: any) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
+   doFilter(value: string){
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
   
  
   }
