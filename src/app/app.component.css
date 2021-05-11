@@ -1,6 +1,17 @@
 table {
   width: 100%;
 }
+.container {
+  width: 60%;
+  margin: 0 auto;
+
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
 
 th.mat-sort-header-sorted {
   color: black;
