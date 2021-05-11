@@ -59,11 +59,12 @@ export class AppComponent implements OnInit,AfterViewInit{
 
   onPageChanged(e:any) {
     console.log('this.array', this.array);
-    let firstCut = e.pageIndex * e.pageSize;
+    this.index=e.pageIndex
+    let firstCut = this.index * e.pageSize;
     let secondCut = firstCut + e.pageSize;
     this.activePageDataChunk = this.array.slice(firstCut, secondCut);
-    console.log('e.pageIndex', e.pageIndex);
-    console.log('firstcut', firstCut);
+    console.log('e.pageIndex', this.index);
+    console.log('pageSize', e.pageSize);
     console.log('==>', this.activePageDataChunk);
     
   }
