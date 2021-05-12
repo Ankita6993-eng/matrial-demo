@@ -24,7 +24,7 @@ export class AppComponent implements OnInit,AfterViewInit{
   activePageDataChunk:any = []
   isLoading = true;
   public array: any=[];
-  public pageSize = 3;
+  public pageSize = 2;
   public currentPage = 0;
   public totalSize = 0;
   public index = 0;
@@ -34,25 +34,57 @@ export class AppComponent implements OnInit,AfterViewInit{
 
   ngOnInit() {
     this.getdata()
+    
+    // setTimeout(() => {
+    //   this.isLoading = false;
+    //   this.dataSource.paginator = this.paginator ;
+    // }, 100);
+  
   }
   ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
+    //this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
   }
 
-  getdata(){
-    this.isLoading = true;
-    this.service.getUser().pipe(delay(1000)).subscribe((data:any) => {
+  public handlePage(e: any) {
+    console.log('page changed', e);
+   // this.isLoading = true;
+    setTimeout(() => {
       this.isLoading = false;
+    }, 500);
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.iterator();
+
+    this.isLoading = true;
+  }
+
+  getdata(){
+    
+    this.service.getUser().subscribe((data:any) => {
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 500);
       this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator ;
+     this.dataSource.paginator = this.paginator ;
       this.array = data;
       this.dataSource.sort = this.sort;
+      this.totalSize = this.array.length;
+      this.iterator();
       //console.log('this.dataSource', this.dataSource);     
     });
+    this.isLoading = true;
+  }
+
+  private iterator() {
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    const part = this.array.slice(start, end);
+    this.dataSource = part;
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
+    
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
@@ -61,9 +93,11 @@ export class AppComponent implements OnInit,AfterViewInit{
   goToPage() {
     this.paginator.pageIndex = this.pageNumber - 1;
     this.paginator.page.next({
+      
       pageIndex: this.paginator.pageIndex,
       pageSize: this.paginator.pageSize,
       length: this.paginator.length
+      
     });
   }
 

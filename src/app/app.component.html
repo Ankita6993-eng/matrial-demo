@@ -11,13 +11,13 @@
 </div>
 
 <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
-  <mat-progress-spinner 
+  <mat-spinner
     color="primary" 
-    mode="indeterminate">
-  </mat-progress-spinner>
+    mode="indeterminate" >
+  </mat-spinner>
 </mat-card>
-
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" >
+<div [hidden]="isLoading">
+<table  mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" >
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef > ID </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -47,18 +47,25 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
+</div>
+
 <div class="tag">
 <mat-form-field class="tag1">
   
   <mat-label>Page size options</mat-label>
   <input  matInput [ngModel]="pageSizeOptions" (ngModelChange)="setPageSizeOptions($event)" [ngModelOptions]="{updateOn: 'blur'}" placeholder="Ex. 2,3,4">
 </mat-form-field>
-<mat-paginator [length]="array.length"  [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true" (page)="pageEvent = $event" [pageIndex]="index"></mat-paginator>
+
+<mat-paginator [length]="array.length"  [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true" (page)="handlePage($event)" [pageIndex]="index" >
+</mat-paginator>
+
+
 
 <div class="tag2">
-<mat-form-field>
-  <mat-label>Enter page number</mat-label>
-  <input matInput type="number"  [(ngModel)]="pageNumber" (ngModelChange)="goToPage()">
+<mat-form-field >
+  <mat-label >Enter page number</mat-label>
+  <input matInput type="number"  [(ngModel)]="pageNumber" (ngModelChange)="goToPage()" >
+ 
 </mat-form-field>
 </div>
 </div>
