@@ -50,24 +50,13 @@ export class AppComponent implements OnInit,AfterViewInit{
       this.dataSource.sort = this.sort;
       //console.log('this.dataSource', this.dataSource);     
     });
-    this.activePageDataChunk = this.array.slice(0,this.pageSize);
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
-    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-  onPageChanged(e:any) {
-    console.log('this.array', this.array);
-    this.index=e.pageIndex
-    console.log('e.pageIndex', this.index);
-    console.log('pageSize', e.pageSize)
-    let firstCut = this.index * e.pageSize;
-    console.log('firstCut', firstCut)
-    let secondCut = firstCut + e.pageSize;
-    console.log('secondCut', secondCut)
-    this.activePageDataChunk = this.array.slice(firstCut, secondCut);
-  }
+ 
 
   goToPage() {
     this.paginator.pageIndex = this.pageNumber - 1;
