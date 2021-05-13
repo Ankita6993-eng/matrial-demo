@@ -13,9 +13,20 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
+import { MatrialFormComponent } from './matrial-form/matrial-form.component';
+import { RectiveFormComponent } from './rective-form/rective-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatIconModule} from '@angular/material/icon';
+import { MatrialModalComponent } from './matrial-modal/matrial-modal.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MatrialFormComponent,
+    RectiveFormComponent,
+    MatrialModalComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +41,12 @@ import { FormsModule } from '@angular/forms';
     FlexLayoutModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

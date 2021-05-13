@@ -1,0 +1,25 @@
+.container {
+    width: 1000px;
+    margin: 0 auto;
+  
+  }
+
+  .tag1 {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+  }
+  .mat-paginator {
+    display: inline-block;
+  }
+  .tag{
+    padding: 15px;
+    margin-left: 450px;
+  }
+  .tag2{
+    margin-left: -450px;
+    margin-top:-70px;
+  }
+  .mat-elevation-z8{
+    width: 100%;
+  }

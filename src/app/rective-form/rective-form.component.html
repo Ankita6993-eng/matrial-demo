@@ -1,0 +1,76 @@
+<p>rective-form works!</p>
+
+
+<div class="container">
+    <form [formGroup]="profileform">
+
+        <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Name </mat-label>
+              <input matInput placeholder="User Name" formControlName="Name">
+              <mat-hint>Hint</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Enter your email</mat-label>
+              <input matInput type="email" placeholder="pat@example.com" formControlName="email" required>
+              <mat-error *ngIf=" profileform.controls['email'].errors?.required">Email Required...</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="example-container">
+            <mat-form-field appearance="fill">
+                <mat-label>Select me</mat-label>
+                <mat-select>
+                  <mat-option value="option">Surat</mat-option>
+                  <mat-option value="option">Ahamdabad</mat-option>
+                  <mat-option value="option">Anand</mat-option>
+                </mat-select>
+                <mat-hint align="end"></mat-hint>
+              </mat-form-field>
+          </div>
+
+          <div class="example-container">
+            <mat-label>Hooby:</mat-label>
+            <section class="example-section">
+              <mat-checkbox class="example-margin" formControlName="hobby">Reading &nbsp; </mat-checkbox>
+              <mat-checkbox class="example-margin" formControlName="hobby">Travelling &nbsp;</mat-checkbox>
+              <mat-checkbox class="example-margin" formControlName="hobby">Sport</mat-checkbox>
+            </section>
+          </div>
+
+          <div class="example-container">
+              <label>Gender : </label>
+              <mat-radio-group formControlName="gender">
+                <mat-radio-button value="Female">Female &nbsp;</mat-radio-button>
+                <mat-radio-button value="Male">Male</mat-radio-button>
+              </mat-radio-group>
+          </div>
+
+          <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+
+          <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Amount</mat-label>
+              <input matInput type="number" class="example-right-align">
+              <span matPrefix>$&nbsp;</span>
+              <span matSuffix>.00</span>
+            </mat-form-field>
+          </div>
+
+          <div class="example-container">
+            
+          </div>
+
+    </form>
+</div>
